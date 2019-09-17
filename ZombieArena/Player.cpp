@@ -66,3 +66,107 @@ float Player::getRotation()
 {
 	return m_Sprite.getRotation();
 }
+Sprite Player::getSprite()
+{
+	return m_Sprite;
+}
+int Player::getHealth()
+{
+	return m_Health;
+}
+void Player::moveLeft()
+{
+	m_LeftPressed = true;
+}
+void Player::moveRight()
+{
+	m_RightPressed = true;
+}
+void Player::moveDown()
+{
+	m_DownPressed = true;
+}
+void Player::moveUp()
+{
+	m_UpPressed = true;
+}
+void Player::stopLeft()
+{
+	m_LeftPressed = false;
+}
+void Player::stopRight()
+{
+	m_RightPressed = false;
+}
+void Player::stopDown()
+{
+	m_DownPressed = false;
+}
+void Player::stopUp()
+{
+	m_UpPressed = false;
+}
+void Player::update(float elapsedTime, Vector2i mousePosition)
+{
+	if (m_UpPressed)
+	{
+		m_Position.y -= m_Speed * elapsedTime;
+	}
+	if (m_DownPressed)
+	{
+		m_Position.y += m_Speed * elapsedTime;
+	}
+	if (m_RightPressed)
+	{
+		m_Position.x += m_Speed * elapsedTime;
+	}
+	if (m_LeftPressed)
+	{
+		m_Position.x -= m_Speed * elapsedTime;
+	}
+	m_Sprite.setPosition(m_Position);
+
+	//keep the player in the arena
+	if (m_Position.x > m_Arena.width - m_TileSize)
+	{
+		m_Position.x = m_Arena.width - m_TileSize;
+	}
+	if (m_Position.x < m_Arena.width + m_TileSize)
+	{
+		m_Position.x = m_Arena.width + m_TileSize;
+	}
+	if (m_Position.y > m_Arena.width - m_TileSize)
+	{
+		m_Position.y = m_Arena.width - m_TileSize;
+	}
+	if (m_Position.y > m_Arena.width + m_TileSize)
+	{
+		m_Position.y = m_Arena.width + m_TileSize;
+	}
+
+	//calculate the angle the player is facing
+	float angle = (atan2(mousePosition.y - m_Resolution.y / 2,
+		mousePosition.x - m_Resolution.x / 2) * 180) / 3.141;
+
+	m_Sprite.setRotation(angle);
+}
+	//adjust player stats
+	void Player::upgradeSpeed()
+	{
+		//20% speed up
+		m_Speed += (START_SPEED * .2);
+	}
+	void Player::upgradeHealth()
+	{
+		//20% health up
+		m_MaxHealth += (START_HEALTH * .2);
+	}
+
+	void Player::increaseHealthLevel(int amount) 
+	{
+		m_Health += amount;
+		//but not beyond max;
+		if(m_Health > m_MaxHealth) {
+			m_Health = m_MaxHealth;
+		}
+	}

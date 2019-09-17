@@ -94,6 +94,6 @@ public:
 	void increaseHealthLevel(int amount);
 
 	//get players current health
-	void getHealth();
+	int getHealth();
 
 };
