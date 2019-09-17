@@ -8,7 +8,7 @@ Player::Player()
 	m_MaxHealth = START_HEALTH;
 
 	//associae texture with sprite
-	m_Texture.loadFromFile("graphic.player.png");
+	m_Texture.loadFromFile("graphics/player.png");
 	m_Sprite.setTexture(m_Texture);
 
 	//set the origin of the sprite to the center
@@ -18,8 +18,8 @@ Player::Player()
 void Player::spawn(IntRect arena, Vector2f resolution, int tileSize)
 {
 	//set player location to middle of arena
-	m_position.x = arena.width / 2;
-	m_position.y = arena.height / 2;
+	m_Position.x = arena.width / 2;
+	m_Position.y = arena.height / 2;
 
 	//copy the details of the arena to the players m_Arena
 	m_Arena.left = arena.left;
