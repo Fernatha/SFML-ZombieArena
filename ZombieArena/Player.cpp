@@ -31,8 +31,8 @@ void Player::spawn(IntRect arena, Vector2f resolution, int tileSize)
 	m_TileSize = tileSize;
 
 	//store the resoolution for future use
-	m_Resolution.x - resolution.x;
-	m_Resolution.y- resolution.y;
+	m_Resolution.x = resolution.x;
+	m_Resolution.y = resolution.y;
 }
 void Player::resetPlayerStats()
 {
@@ -131,17 +131,17 @@ void Player::update(float elapsedTime, Vector2i mousePosition)
 	{
 		m_Position.x = m_Arena.width - m_TileSize;
 	}
-	if (m_Position.x < m_Arena.width + m_TileSize)
+	if (m_Position.x < m_Arena.left + m_TileSize)
 	{
-		m_Position.x = m_Arena.width + m_TileSize;
+		m_Position.x = m_Arena.left + m_TileSize;
 	}
-	if (m_Position.y > m_Arena.width - m_TileSize)
+	if (m_Position.y > m_Arena.height - m_TileSize)
 	{
-		m_Position.y = m_Arena.width - m_TileSize;
+		m_Position.y = m_Arena.height - m_TileSize;
 	}
-	if (m_Position.y > m_Arena.width + m_TileSize)
+	if (m_Position.y < m_Arena.top + m_TileSize)
 	{
-		m_Position.y = m_Arena.width + m_TileSize;
+		m_Position.y = m_Arena.top + m_TileSize;
 	}
 
 	//calculate the angle the player is facing
